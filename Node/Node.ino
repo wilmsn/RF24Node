@@ -33,7 +33,7 @@
 // Node 104
 //#define GAESTEZIMMERTHERMOMETER
 // Node 105
-#define BASTELZIMMERTHERMOMETER_SW
+//#define BASTELZIMMERTHERMOMETER_SW
 // Node 106
 //#define KUGELNODE1
 // Node 107
@@ -49,7 +49,7 @@
 // Node 198
 //#define ZAEHLER_TEST_198
 // Node 240
-//#define TESTNODE_240
+#define TESTNODE_240
 // ------ End of configuration part ------------
 //****************************************************
 // Default settings and settings for the individual nodes are in "Node_settings.h"

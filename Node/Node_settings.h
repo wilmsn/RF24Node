@@ -272,8 +272,8 @@
 #define VOLT_LV                       3.3
 #define SLEEPTIME                     60
 #define EMPTYLOOPS                    4
-//#define SENSOR_18B20                  8
-#define SENSOR_BOSCH
+#define SENSOR_18B20                  8
+//#define SENSOR_BOSCH
 //#define TEMP_BOSCH_CHANNEL            4
 //#define PRES_BOSCH_CHANNEL            5
 //#define HUMI_BOSCH_CHANNEL            6
