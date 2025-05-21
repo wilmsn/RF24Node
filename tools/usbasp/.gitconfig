@@ -1,0 +1,15 @@
+[user]
+	email = mail@wilmie.de
+	name = Norbert
+[color "diff"]
+	meta = white black
+	old = yellow
+[color]
+	diff = true
+	ui = true
+[color "status"]
+	old = yellow
+	added = yellow
+	changed = yellow
+	untracked = yellow
+
