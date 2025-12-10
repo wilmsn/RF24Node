@@ -140,8 +140,8 @@
 #define VOLT_LV              3.6
 #define VOLT_OFF             0.55
 #define SLEEP4MS_FAC         990
-//#define STATUSLED_ON         LOW
-//#define STATUSLED_OFF        HIGH
+#define STATUSLED_ON         LOW
+#define STATUSLED_OFF        HIGH
 #endif
 
 //-----------------------------------------------------
@@ -265,13 +265,16 @@
 //-----------------------------------------------------
 #if defined(TESTNODE_240)
 #define RF24NODE                      240
-#define EEPROM_VERSION                7
+#define EEPROM_VERSION                8
+#define DEBUG_SERIAL_SENSOR
+#define DEBUG_SERIAL_RADIO
 //#define BATTERY_READ_EXTERNAL         A2
 //#define BATTERY_VOLTAGEDIVIDER_R1     220
 //#define BATTERY_VOLTAGEDIVIDER_R2     220
 #define VOLT_LV                       3.3
 #define SLEEPTIME                     60
 #define EMPTYLOOPS                    4
+//#define SENSOR_DUMMY
 #define SENSOR_18B20                  8
 //#define SENSOR_BOSCH
 //#define TEMP_BOSCH_CHANNEL            4
@@ -284,6 +287,7 @@
 //#define TEMP_HTU2X_CHANNEL            7
 //#define HUMI_HTU2X_CHANNEL            8
 #define DISPLAY_5110
+#define CONTRAST                        60
 //#define STATUSLED                     7
 #endif
 
@@ -331,12 +335,6 @@
 #ifndef ZAEHLER_PIN
 #define ZAEHLER_PIN             2
 #endif
-#endif
-
-#if defined(LOAD_BALANCER_PIN)
-#ifndef LOAD_BALANCER
-#define LOAD_BALANCER      0.2
-#endif 
 #endif
 
 #if defined(DISPLAY_5110)
@@ -448,29 +446,6 @@
 // Channel for humidity
 #ifndef HUMI_HTU2X_CHANNEL
 #define HUMI_HTU2X_CHANNEL     2
-#endif
-#endif
-
-#ifdef SOLARZELLE1
-#ifndef SOLARZELLE1_CHANNEL
-#define SOLARZELLE1_CHANNEL     5
-#endif
-
-#endif
-
-#ifdef SOLARZELLE2
-#ifndef SOLARZELLE2_CHANNEL
-#define SOLARZELLE2_CHANNEL     6
-#endif
-
-#endif
-
-#if defined(LOAD_BALLANCER) || defined(DISCHARGE1) || defined(DISCHARGE2)
-#ifndef BATT1_CHANNEL
-#define BATT1_CHANNEL           7
-#endif
-#ifndef BATT_MOD_CHANNEL
-#define BATT_MOD_CHANNEL        8
 #endif
 #endif
 
