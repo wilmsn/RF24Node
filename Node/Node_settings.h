@@ -9,6 +9,9 @@
 //    Individual settings
 //-----------------------------------------------------
 #if defined(AUSSENTHERMOMETER1)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE            200
 #define SENSOR_BOSCH
 #define STATUSLED           3
@@ -21,8 +24,12 @@
 #define SLEEP4MS_FAC        995
 #define EEPROM_VERSION      9
 #endif
+#endif
 //-----------------------------------------------------
 #if defined(AUSSENTHERMOMETER2)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE            201
 #define SENSOR_HTU2X
 #define HUMI_HTU2X_CHANNEL  3
@@ -36,62 +43,12 @@
 #define SLEEP4MS_FAC        976
 #define EEPROM_VERSION      7
 #endif
-//-----------------------------------------------------
-#if defined(SOLARNODE1)
-#define RF24NODE               202
-#define VOLT_LV                2.2
-#define SLEEPTIME_LV           300
-#define EEPROM_VERSION         7
-#define STATUSLED              A2
-#define SLEEPTIME              30
-#define EMPTYLOOPS             9
-// Mist die Spannung an der Referenzzelle die NUR mit einem Widerstand abgeschlossen ist
-#define SOLARZELLE1            A0
-// Mist die Spannung an der Versorgungssolarzelle vor dem Step-Up Wandler
-#define SOLARZELLE2            A3
-// Ist die Batteriespannung groesser als DISCHARGE1 wird der Tiefschlaf vom MC abgeschaltet
-#define DISCHARGE1             2.7
-// Ist die Batteriespannung groesser als DISCHARGE2 wird zusätzlich zu DISCHARGE1 die Status LED eingeschaltet
-#define DISCHARGE2             2.75
-// Ist die Batteriespannung groesser als DISCHARGE3 wird zusätzlich zu DISCHARGE2 Strom über einen Widerstand an DISCHARGE3_PIN gegen GND abgeleitet
-#define DISCHARGE3             2.8
-#define DISCHARGE3_PIN         5
-// Load Ballancer
-// Mittlerer Pol der Batterie ist über einen 680 Ohm Widerstand an den Pin angeschlossen
-#define LOAD_BALLANCER_PIN     A1
-// Maximale Differenzspannung zwischen den Zellen
-#define LOAD_BALLANCER         0.1
 #endif
-//-----------------------------------------------------
-#if defined(SOLARNODE2)
-#define RF24NODE               203
-#define VOLT_LV                2.4
-#define SLEEPTIME_LV           300
-#define EEPROM_VERSION         7
-#define STATUSLED              A2
-#define SLEEPTIME              30
-#define EMPTYLOOPS             9
-#define SENSOR_BOSCH
-// Mist die Spannung an der Referenzzelle die NUR mit einem Widerstand abgeschlossen ist
-#define SOLARZELLE1            A0
-// Mist die Spannung an der Versorgungssolarzelle vor dem Step-Up Wandler
-#define SOLARZELLE2            A3
-// Ist die Batteriespannung groesser als DISCHARGE1 wird der Tiefschlaf vom MC abgeschaltet
-#define DISCHARGE1             2.7
-// Ist die Batteriespannung groesser als DISCHARGE2 wird zusätzlich zu DISCHARGE1 die Status LED eingeschaltet
-#define DISCHARGE2             2.75
-// Ist die Batteriespannung groesser als DISCHARGE3 wird zusätzlich zu DISCHARGE2 Strom über einen Widerstand an DISCHARGE3_PIN gegen GND abgeleitet
-#define DISCHARGE3             2.8
-#define DISCHARGE3_PIN         5
-// Load Ballancer
-// Mittlerer Pol der Batterie ist über einen 680 Ohm Widerstand an den Pin angeschlossen
-#define LOAD_BALLANCER_PIN     A1
-// Maximale Differenzspannung zwischen den Zellen
-#define LOAD_BALLANCER         0.1
-#endif
-
 //-----------------------------------------------------
 #if defined(BASTELZIMMERTHERMOMETER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             100
 #define SENSOR_18B20         8
 #define DISPLAY_5110
@@ -104,9 +61,12 @@
 #define STATUSLED_ON         LOW
 #define STATUSLED_OFF        HIGH
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(NODE_101)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             101
 #define SENSOR_18B20         8
 #define DISPLAY_5110
@@ -116,9 +76,12 @@
 #define VOLT_OFF             0.55
 #define VOLT_LV              3.6
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(SCHLAFZIMMERTHERMOMETER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             102
 #define SENSOR_BOSCH
 #define DISPLAY_5110
@@ -127,9 +90,12 @@
 #define VOLT_OFF             0.55
 #define VOLT_LV              3.6
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(KUECHENTHERMOMETER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             103
 #define SENSOR_18B20         8
 #define DISPLAY_5110
@@ -143,9 +109,12 @@
 #define STATUSLED_ON         LOW
 #define STATUSLED_OFF        HIGH
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(GAESTEZIMMERTHERMOMETER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             104
 #define SLEEPTIME            900
 #define SLEEPTIME_LV         7200
@@ -156,9 +125,12 @@
 #define EMPTYLOOPS           0
 #define VOLT_LV              3.6
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(BASTELZIMMERTHERMOMETER_SW)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             105
 #define EEPROM_VERSION       5
 #define SENSOR_18B20         8
@@ -169,9 +141,12 @@
 #define STATUSLED_ON         LOW
 #define STATUSLED_OFF        HIGH
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(KUGELNODE1)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             106
 #define SLEEPTIME_SEC        300
 #define SENSOR_BOSCH
@@ -183,8 +158,12 @@
 #define VOLT_OFF             0.55
 #define CONTRAST             55
 #endif
+#endif
 //-----------------------------------------------------
 #if defined(KUGELNODE2)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             107
 #define SLEEPTIME_SEC        300
 #define SENSOR_BOSCH
@@ -195,8 +174,12 @@
 #define VOLT_LV              3.5
 #define VOLT_OFF             0.55
 #endif
+#endif
 //-----------------------------------------------------
 #if defined(MW_WOHNZIMMER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             108
 #define SLEEPTIME_SEC        300
 #define SENSOR_HTU2X
@@ -208,9 +191,12 @@
 #define VOLT_LV              3.5
 #define VOLT_OFF             0.55
 #endif
-
+#endif
 //-----------------------------------------------------
 #if defined(ANKLEIDEZIMMERTHERMOMETER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE             110
 #define EEPROM_VERSION       4
 #define SENSOR_18B20         8
@@ -222,8 +208,12 @@
 #define STATUSLED_ON         LOW
 #define STATUSLED_OFF        HIGH
 #endif
+#endif
 //-----------------------------------------------------
 #if defined(GASZAEHLERNODE)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE                111
 #define EEPROM_VERSION          6
 #define SENSOR_BOSCH
@@ -239,10 +229,14 @@
 #define ZAEHLER_START           288140
 #define SLEEP4MS_FAC            990
 #endif
+#endif
 //-----------------------------------------------------
 //    Testnodes
 //-----------------------------------------------------
 #if defined(ZAEHLER_TEST_198)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define DEBUG_SERIAL_SENSOR
 #define DEBUG_SERIAL_RADIO
 //#define DEBUG_DISPLAY_5110
@@ -262,24 +256,34 @@
 #define LOW_VOLT_LEVEL          2.0
 //#define SLEEP4MS_FAC           950
 #endif
+#endif
 //-----------------------------------------------------
 #if defined(TESTNODE_240)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
 #define RF24NODE                      240
-#define EEPROM_VERSION                8
+#define EEPROM_VERSION                0
+#define SLEEPTIME                     60
+#define EMPTYLOOPS                    1
 #define DEBUG_SERIAL_SENSOR
 #define DEBUG_SERIAL_RADIO
+#define DEBUG_SERIAL_DISPLAY
+//#define DEBUG_STATUSLED_RADIO
+#define SLEEPTYPE                      delay
+
 //#define BATTERY_READ_EXTERNAL         A2
 //#define BATTERY_VOLTAGEDIVIDER_R1     220
 //#define BATTERY_VOLTAGEDIVIDER_R2     220
-#define VOLT_LV                       3.3
+#define VOLT_LV                       2.3
 #define SLEEPTIME                     60
 #define EMPTYLOOPS                    4
 //#define SENSOR_DUMMY
-#define SENSOR_18B20                  8
-//#define SENSOR_BOSCH
-//#define TEMP_BOSCH_CHANNEL            4
-//#define PRES_BOSCH_CHANNEL            5
-//#define HUMI_BOSCH_CHANNEL            6
+//#define SENSOR_18B20                  8
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL            4
+#define PRES_BOSCH_CHANNEL            5
+#define HUMI_BOSCH_CHANNEL            6
 //#define SENSOR_AHT20
 //#define TEMP_AHT20_CHANNEL            2
 //#define HUMI_AHT20_CHANNEL            3
@@ -287,19 +291,10 @@
 //#define TEMP_HTU2X_CHANNEL            7
 //#define HUMI_HTU2X_CHANNEL            8
 #define DISPLAY_5110
-#define CONTRAST                        60
+//#define CONTRAST                        40
 //#define STATUSLED                     7
 #endif
-
-//-----------------------------------------------------
-#if defined(TESTNODE)
-#define RF24NODE                      100
-#define SLEEPTIME                     60
-#define EMPTYLOOPS                    0
-#define SENSOR_DUMMY
-#define DUMMY_TEMP                    33.3
 #endif
-
 
 // ------ End of Node configuration part ------------
 // The following parameters have to be configured once
@@ -342,10 +337,19 @@
 #endif
 
 //define constrains for debugging
+#if defined(DEBUG_SERIAL_DISPLAY)
+#define DEBUG_SERIAL
+#endif
 #if defined(DEBUG_SERIAL_SENSOR)
 #define DEBUG_SERIAL
 #endif
 #if defined(DEBUG_SERIAL_RADIO)
+#define DEBUG_SERIAL
+#endif
+#if defined(DEBUG_SERIAL_RADIO_DETAILS)
+#define DEBUG_SERIAL
+#endif
+#if defined(DEBUG_SERIAL_RADIO_RXTX)
 #define DEBUG_SERIAL
 #endif
 #if defined(DEBUG_SERIAL_PROC)
