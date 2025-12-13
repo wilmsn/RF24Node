@@ -25,9 +25,9 @@
 // Node 102
 //#define SCHLAFZIMMERTHERMOMETER
 // Node 103
-#define KUECHENTHERMOMETER
+//#define KUECHENTHERMOMETER
 // Node 104
-//#define GAESTEZIMMERTHERMOMETER
+#define GAESTEZIMMERTHERMOMETER
 // Node 105
 //#define BASTELZIMMERTHERMOMETER_SW
 // Node 106
@@ -41,7 +41,6 @@
 // Node 111
 //#define GASZAEHLERNODE
 //----Testnodes-----
-//#define TESTNODE
 // Node 198
 //#define ZAEHLER_TEST_198
 // Node 240
@@ -52,7 +51,9 @@
 #include "Node_settings.h"
 //-----------------------------------------------------
 //*****************************************************
-
+#ifndef RF24NODE
+#error "Node nicht definiert"
+#endif
 #include <avr/pgmspace.h>
 #include <SPI.h>
 #include <sleeplib.h>
@@ -189,8 +190,8 @@ unsigned long       tempsleeptime_ms;
 //Some Var for restore after sleep of display
 #if defined(DISPLAY_ALL)
 #if defined(DISPLAY_LAYOUT_TEMPHUMI)
-
-#else
+#endif
+#if defined(DISPLAY_LAYOUT_DEFAULT)
 float               field1_val, field2_val, field3_val, field4_val;
 bool                field1_set = false;
 bool                field2_set = false;
@@ -239,6 +240,7 @@ void get_sensordata(void) {
     temp_dummy=DUMMY_TEMP;
 #define DISPLAY_TEMP temp_dummy
 #if defined(DEBUG_SERIAL_SENSOR)
+    Serial.println("Dummysensor");
     Serial.print("Temp: ");
     Serial.print(temp_dummy);
 #endif
@@ -253,6 +255,7 @@ void get_sensordata(void) {
   temp_18b20=s_18b20.getTempCByIndex(0);
 #define DISPLAY_TEMP temp_18b20
 #if defined(DEBUG_SERIAL_SENSOR)
+    Serial.println("18B20");
     Serial.print("Temp: ");
     Serial.print(temp_18b20);
 #endif
@@ -299,6 +302,7 @@ void get_sensordata(void) {
   temp_htu2x = htu2x.getTemperature();
 #define DISPLAY_TEMP temp_htu2x
 #if defined(DEBUG_SERIAL_SENSOR)
+    Serial.println("HTU2X");
     Serial.print("Temp: ");
     Serial.println(temp_htu2x);
 #endif
@@ -317,6 +321,7 @@ void get_sensordata(void) {
   temp_aht20 = aht20.getTemperature();
 #define DISPLAY_TEMP temp_aht20
 #if defined(DEBUG_SERIAL_SENSOR)
+    Serial.println("AHT20");
     Serial.print("Temp: ");
     Serial.println(temp_aht20);
 #endif
@@ -620,9 +625,6 @@ void init_eeprom(bool reset_eeprom) {
 #if defined(DISPLAY_ALL)
     eeprom.brightnes        = BRIGHTNES;
     eeprom.contrast         = CONTRAST;
-#else
-    eeprom.brightnes        = 0;
-    eeprom.contrast         = 0;
 #endif
     eeprom.sleeptime        = SLEEPTIME;
     eeprom.sleep4ms_fac     = SLEEP4MS_FAC;
@@ -634,7 +636,6 @@ void init_eeprom(bool reset_eeprom) {
     eeprom.volt_off         = VOLT_OFF;
     eeprom.volt_lv          = VOLT_LV;
     eeprom.pa_level         = PA_LEVEL;
-    eeprom.pa_level         = 0;
     eeprom.sleeptime_lv     = SLEEPTIME_LV;
     if (EEPROM_VERSION > 0) EEPROM.put(0, eeprom);
   }

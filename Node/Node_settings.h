@@ -121,9 +121,19 @@
 #define SLEEP4MS_FAC         878
 #define STATUSLED            7
 #define SENSOR_18B20         8
-#define EEPROM_VERSION       7
+#define TEMP_18B20_CHANNEL   1
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   4
+#define PRES_BOSCH_CHANNEL   5
+#define HUMI_BOSCH_CHANNEL   6
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   2
+#define HUMI_AHT20_CHANNEL   3
+#define EEPROM_VERSION       4
 #define EMPTYLOOPS           0
 #define VOLT_LV              3.6
+#define VOLT_FAC             1
+#define VOLT_OFF             0.55
 #endif
 #endif
 //-----------------------------------------------------
@@ -284,9 +294,9 @@
 #define TEMP_BOSCH_CHANNEL            4
 #define PRES_BOSCH_CHANNEL            5
 #define HUMI_BOSCH_CHANNEL            6
-//#define SENSOR_AHT20
-//#define TEMP_AHT20_CHANNEL            2
-//#define HUMI_AHT20_CHANNEL            3
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL            2
+#define HUMI_AHT20_CHANNEL            3
 //#define SENSOR_HTU2X
 //#define TEMP_HTU2X_CHANNEL            7
 //#define HUMI_HTU2X_CHANNEL            8
