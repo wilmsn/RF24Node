@@ -18,7 +18,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "rf24_config.h"
-//#include "config.h"
 
 /**
  * @defgroup datafmt Definitions to the own dataformat
@@ -182,8 +181,6 @@ uint32_t calcTransportValue(uint8_t channel, char* value1, char* value2);
  */
 char* unpackTransportValue(uint32_t data, char* buf);
 
-//#if defined(__linux__)
-
 /**
  * Diese Funktion packt die Daten entsprechend des übergebenen Datatypes ein.
  * @note Diese Funktion läuft wegen den verwendetetn C Funktionen nur auf Linux Systemen
@@ -204,8 +201,6 @@ uint32_t calcTransportValue(uint8_t channel, char* value, uint8_t dataType);
  * @return Den gepackten Transportwert
  */
 uint32_t calcTransportValue(uint8_t channel, char* value);
-
-//#endif
 
 /**
  * Extrahiert den Datentyp aus den Transportdaten 
