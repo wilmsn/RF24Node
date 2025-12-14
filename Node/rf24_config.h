@@ -83,21 +83,6 @@
 /// Schreiben eines beliebigen Wertes in dieses Register setzt alle EEPROM Werte auf Default zurück.
 /// Format: uint16_t; Wertebereich: beliebig
 #define REG_DEFAULT                 83
-/// EntladeSpannung Level 1<br>
-/// Bei Überschreiten dieser Spannung wird der ATMega nicht mehr in den Schlafmodus versetzt.
-/// Format: float; Wertebereich: 1...20
-#define	REG_DISCHARGE_LEV1          91
-/// EntladeSpannung Level 2<br>
-/// Bei Überschreiten dieser Spannung wird die Batterie zusätzlich über einen Widerstand entladen.
-/// Format: float; Wertebereich: 1...20
-#define	REG_DISCHARGE_LEV2          92
-/// EntladeSpannung Level 2<br>
-/// Bei Überschreiten dieser Spannung wird die Batterie zusätzlich über einen Widerstand entladen.
-/// Format: float; Wertebereich: 1...20
-#define	REG_DISCHARGE_LEV3          93
-/// Maximal zulässige Differenzspannung bei 2 Batterien.
-/// Wird diese Spannung überschritten, wirden die Spannungspegel durch gezieltes laden/entladen angepasst.
-#define	REG_LOAD_BALLANCER	    94
 /// Kontrastpegel (nur bei Displays)
 #define	REG_CONTRAST                95
 /// Helligkeitspegel (nur bei Displays)
@@ -182,11 +167,6 @@
 /// Nachricht ist ein Init
 /// Ursprung: Node; Empfänger: Hub
 #define PAYLOAD_TYPE_INIT           1
-
-/// Nachricht ist ein Messwert aus einem ESPNode
-/// Ursprung: ESPNode; Empfänger: Hub
-/// Diese Nachricht wird nicht vom Hub beantwortet
-#define PAYLOAD_TYPE_ESP            41
 
 /// Nachricht ist ein initialer Heatbeat
 /// Ursprung: Node; Empfänger: Hub
@@ -280,19 +260,5 @@ typedef struct {
 /// Datenpaket 6 (32Bit)
     uint32_t        data6;         
 } payload_t;
-
-/**
- * @typedef udpdata_t Die Datenstructur zur Übertragung der Daten zwischen Gateway und Hub
- * Im Prinzig ebtspricht diese Struktur der payload_t Struktur erweitert um ein Feld zur Aufnahme der Gateway_id.
- * 
- */
-typedef struct {
-/// Die eindeutige Gateway ID
-  uint16_t      gw_no;         // the number of the sending gateway
-/// Die Payloadstruktur wie unter payload_t definiert.
-  payload_t     payload;      // the payload to send forward
-/// Der Unix Timestamp
-  time_t        utime;
-} udpdata_t;
 
 #endif

@@ -25,9 +25,9 @@
 // Node 102
 //#define SCHLAFZIMMERTHERMOMETER
 // Node 103
-//#define KUECHENTHERMOMETER
+#define KUECHENTHERMOMETER
 // Node 104
-#define GAESTEZIMMERTHERMOMETER
+//#define GAESTEZIMMERTHERMOMETER
 // Node 105
 //#define BASTELZIMMERTHERMOMETER_SW
 // Node 106
@@ -61,7 +61,6 @@
 #include <EEPROM.h>
 #include "dataformat.h"
 #include "version.h"
-#include "config.h"
 #include "rf24_config.h"
 #include <nRF24L01.h>
 #include <RF24.h>
@@ -207,34 +206,6 @@ boolean             display_on = true;
 RF24 radio(RADIO_CE_PIN,RADIO_CSN_PIN);
 
 void get_sensordata(void) {
-// Read Voltage and calculate battery
-  u_ref = vcc.Read_Volts();
-#if defined(BATTERY_READ_EXTERNAL)
-  vcc_mess = (float)analogRead(BATTERY_READ_EXTERNAL) / 1024.0 * u_ref
-              * (float)(BATTERY_VOLTAGEDIVIDER_R1 + BATTERY_VOLTAGEDIVIDER_R2) / (float)BATTERY_VOLTAGEDIVIDER_R2;
-#else
-  vcc_mess = u_ref;
-#endif
-  cur_voltage = ( vcc_mess * eeprom.volt_fac ) + eeprom.volt_off;
-  low_voltage_flag = (eeprom.volt_lv > 1.5) && (cur_voltage <= eeprom.volt_lv);
-#if defined(DEBUG_SERIAL_SENSOR)
-   Serial.print("Volt (gemessen): ");
-   Serial.println(vcc_mess);
-   Serial.print("Volt Faktor: ");
-   Serial.println(eeprom.volt_fac);
-   Serial.print("Volt Offset: ");
-   Serial.println(eeprom.volt_off);
-   Serial.print("Volt: ");
-   Serial.println(cur_voltage);
-   Serial.print("Low Voltage Flag: ");
-   if ( low_voltage_flag ) {       
-     Serial.println("set");
-   } else {
-     Serial.println("not set");
-   }
-#endif  
-// Ende Voltage
-
 // Sensor Dummy
 #if defined(SENSOR_DUMMY)
     temp_dummy=DUMMY_TEMP;
@@ -318,6 +289,7 @@ void get_sensordata(void) {
 // Sensor AHT20
 #if defined(SENSOR_AHT20)
   aht20.startSingleMeasure();
+  delay(50);
   temp_aht20 = aht20.getTemperature();
 #define DISPLAY_TEMP temp_aht20
 #if defined(DEBUG_SERIAL_SENSOR)
@@ -333,6 +305,34 @@ void get_sensordata(void) {
 #endif
 #endif
 // ENDE: Sensor AHT20
+// Read Voltage and calculate battery
+  u_ref = vcc.Read_Volts();
+#if defined(BATTERY_READ_EXTERNAL)
+  vcc_mess = (float)analogRead(BATTERY_READ_EXTERNAL) / 1024.0 * u_ref
+              * (float)(BATTERY_VOLTAGEDIVIDER_R1 + BATTERY_VOLTAGEDIVIDER_R2) / (float)BATTERY_VOLTAGEDIVIDER_R2;
+#else
+  vcc_mess = u_ref;
+#endif
+  cur_voltage = ( vcc_mess * eeprom.volt_fac ) + eeprom.volt_off;
+  low_voltage_flag = (eeprom.volt_lv > 1.5) && (cur_voltage <= eeprom.volt_lv);
+#if defined(DEBUG_SERIAL_SENSOR)
+   Serial.print("Volt (gemessen): ");
+   Serial.println(vcc_mess);
+   Serial.print("Volt Faktor: ");
+   Serial.println(eeprom.volt_fac);
+   Serial.print("Volt Offset: ");
+   Serial.println(eeprom.volt_off);
+   Serial.print("Volt: ");
+   Serial.println(cur_voltage);
+   Serial.print("Low Voltage Flag: ");
+   if ( low_voltage_flag ) {       
+     Serial.println("set");
+   } else {
+     Serial.println("not set");
+   }
+#endif  
+// Ende Voltage
+
 }
 
 uint32_t action_loop(uint32_t data) {
@@ -713,16 +713,19 @@ void setup(void) {
 
   delay(100);
 
+#if defined(DISPLAY_ALL)
+
 #if defined(DEBUG_DISPLAY_5110)
   lcd.begin();
   lcd.clear();
 #endif
 
-#if defined(DISPLAY_ALL)
 #if defined(DISPLAY_5110)
   lcd.begin();
-//  lcd.setContrast(eeprom.contrast);
-  lcd.setContrast(40);
+  lcd.setContrast(eeprom.contrast);
+  lcd.setDisplayMode(LCD5110::allon);
+  delay(500);
+  lcd.setDisplayMode(LCD5110::normal);
   lcd.setFont(LCD5110::small);
   lcd.clear();
   lcd.println();
@@ -730,7 +733,7 @@ void setup(void) {
   lcd.println(RF24NODE);
   lcd.println();
   lcd.println("    SW:");
-  lcd.println(SWVERSIONSTR);
+  lcd.println(SWVERSION_STR);
   lcd.draw();
 #if defined(MONITOR)
   monitor(1000);
@@ -770,7 +773,7 @@ void monitor(uint32_t delaytime) {
   lcd.println(string_0);
   lcd.println();
   lcd.print("    ");
-  lcd.print(SWVERSION);
+  lcd.print(SWVERSIONSTR);
   lcd.draw();
   SLEEPTYPE(delaytime);
   delay(1);
@@ -1297,9 +1300,6 @@ void exec_jobs(void) {
 }
 
 void loop(void) {
-#if defined(ZAEHLER)
-  if (loopcount == 0)
-#endif
   get_sensordata();
   if ( loopcount == 0) {
 #if defined(DEBUG_SERIAL_RADIO)
@@ -1399,6 +1399,9 @@ void loop(void) {
   }
   sleeptime_kor = 0;
 #ifdef ZAEHLER  // Sonderhehandlung für Zähler
+/*  Hier ist ein Abtastverfahren umgesetzt. Der Node wacht alle 60ms auf, tastet den Zählerpin ab und 
+  inkrementiert ggf. die Zaehlervariablen. Erst wenn die voreingestellte Schlafzeit vergangen ist wird
+  der loop() komplett inkl. ERmittlung der sonstigen Sensordaten und versenden mittels Radio. */
   while (sumSleepTime_ms < tempsleeptime_ms) {
     bool pinstate = digitalRead(ZAEHLER_PIN);
     if ( (statusStack & 0b00001111) == 0b00001111 && (pinstate == LOW) ) {
@@ -1419,6 +1422,7 @@ void loop(void) {
  * ENDE Trennung: Zählernodes / normale Nodes
  */
 #endif   //ZAEHLER
+  delay(50);    //Give VCC some time to sattle after wakeup
   loopcount++;
   if ( loopcount > eeprom.emptyloops ) loopcount = 0;
 #ifdef DEBUG_SERIAL

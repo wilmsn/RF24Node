@@ -108,6 +108,7 @@
 #define SLEEP4MS_FAC         990
 #define STATUSLED_ON         LOW
 #define STATUSLED_OFF        HIGH
+#define CONTRAST             75
 #endif
 #endif
 //-----------------------------------------------------
@@ -237,6 +238,7 @@
 #define ZAEHLER_LO_SET_CHANNEL  51 
 #define ZAEHLER_HI_SET_CHANNEL  52 
 #define ZAEHLER_START           288140
+#define ZAEHLER_PIN             2
 #define SLEEP4MS_FAC            990
 #endif
 #endif
