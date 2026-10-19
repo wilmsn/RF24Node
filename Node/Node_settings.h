@@ -83,12 +83,14 @@
 #error "Doppelte Node Definition
 #else
 #define RF24NODE             102
+#define EEPROM_VERSION       6
 #define SENSOR_BOSCH
 #define DISPLAY_5110
-#define EEPROM_VERSION       8
+#define DISPLAY_LAYOUT_TEMPHUMI
+#define CONTRAST             70
 #define EMPTYLOOPS           9
 #define VOLT_OFF             0.55
-#define VOLT_LV              3.6
+#define VOLT_LV              3.7
 #endif
 #endif
 //-----------------------------------------------------
@@ -159,14 +161,19 @@
 #error "Doppelte Node Definition
 #else
 #define RF24NODE             106
-#define SLEEPTIME_SEC        300
 #define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   1
+#define PRES_BOSCH_CHANNEL   2
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   3
+#define HUMI_AHT20_CHANNEL   4
 #define DISPLAY_5110
-#define EEPROM_VERSION       7
-#define SLEEPTIME            120
+#define DISPLAY_LAYOUT_TEMPHUMI
+#define EEPROM_VERSION       9
+#define SLEEPTIME            240
 #define EMPTYLOOPS           4
 #define VOLT_LV              3
-#define VOLT_OFF             0.55
+#define VOLT_OFF             0.6
 #define CONTRAST             55
 #endif
 #endif
@@ -176,10 +183,15 @@
 #error "Doppelte Node Definition
 #else
 #define RF24NODE             107
-#define SLEEPTIME_SEC        300
 #define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   1
+#define PRES_BOSCH_CHANNEL   2
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   3
+#define HUMI_AHT20_CHANNEL   4
 #define DISPLAY_5110
-#define EEPROM_VERSION       3
+#define DISPLAY_LAYOUT_TEMPHUMI
+#define EEPROM_VERSION       4
 #define SLEEPTIME            120
 #define EMPTYLOOPS           4
 #define VOLT_LV              3.5
@@ -192,7 +204,6 @@
 #error "Doppelte Node Definition
 #else
 #define RF24NODE             108
-#define SLEEPTIME_SEC        300
 #define SENSOR_HTU2X
 #define DISPLAY_5110
 #define DISPLAY_LAYOUT_TEMPHUMI
@@ -201,6 +212,68 @@
 #define EMPTYLOOPS           4
 #define VOLT_LV              3.5
 #define VOLT_OFF             0.55
+#endif
+#endif
+//-----------------------------------------------------
+#if defined(KELLERTHERMOMETER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
+#define RF24NODE             111
+#define EEPROM_VERSION       3
+#define SENSOR_BOSCH
+#define SLEEPTIME            900
+#define EMPTYLOOPS           0
+#define VOLT_LV              2.7
+#endif
+#endif
+//-----------------------------------------------------
+#if defined(MW_KUECHE)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
+#define RF24NODE             112
+#define EEPROM_VERSION       4
+#define SLEEPTIME            120
+#define EMPTYLOOPS           4
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   1
+#define PRES_BOSCH_CHANNEL   2
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   3
+#define HUMI_AHT20_CHANNEL   4
+#define DISPLAY_5110
+#define DISPLAY_LAYOUT_TEMPHUMI
+#define CONTRAST             70
+#define SLEEPTIME            120
+#define VOLT_LV              3 //3.5
+#define VOLT_OFF             0
+#define STATUSLED_ON         HIGH
+#define STATUSLED_OFF        LOW
+#endif
+#endif
+//-----------------------------------------------------
+#if defined(MW_SCHLAFZIMMER)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
+#define RF24NODE             113
+#define EEPROM_VERSION       6
+#define SLEEPTIME            120
+#define EMPTYLOOPS           4
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   1
+#define PRES_BOSCH_CHANNEL   2
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   3
+#define HUMI_AHT20_CHANNEL   4
+#define DISPLAY_5110
+#define DISPLAY_LAYOUT_TEMPHUMI
+#define VOLT_LV              3.0
+#define VOLT_OFF             0.55
+//#define NO_STATUSLED
+//#define STATUSLED_ON         HIGH
+//#define STATUSLED_OFF        LOW
 #endif
 #endif
 //-----------------------------------------------------
@@ -221,25 +294,96 @@
 #endif
 #endif
 //-----------------------------------------------------
-#if defined(GASZAEHLERNODE)
+#if defined(SENSORNODE1)
 #if defined(RF24NODE)
 #error "Doppelte Node Definition
 #else
-#define RF24NODE                111
-#define EEPROM_VERSION          6
+#define RF24NODE             121
 #define SENSOR_BOSCH
-#define SLEEPTIME               120
-#define EMPTYLOOPS              0
-#define LOW_VOLT_LEVEL          2.0
-#define ZAEHLER
-#define ZAEHLER_LO_CHANNEL      11
-#define ZAEHLER_HI_CHANNEL      12
-#define ZAEHLER_CHANNEL         13
-#define ZAEHLER_LO_SET_CHANNEL  51 
-#define ZAEHLER_HI_SET_CHANNEL  52 
-#define ZAEHLER_START           288140
-#define ZAEHLER_PIN             2
-#define SLEEP4MS_FAC            990
+#define TEMP_BOSCH_CHANNEL   4
+#define PRES_BOSCH_CHANNEL   5
+#define HUMI_BOSCH_CHANNEL   6
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   2
+#define HUMI_AHT20_CHANNEL   3
+#define EEPROM_VERSION       39
+#define EMPTYLOOPS           0
+#define SLEEPTIME            1200
+#define SLEEPTIME_LV         7200
+#define VOLT_LV              3.5
+#define VOLT_OFF             0.7
+#define SLEEP4MS_FAC         992
+#define STATUSLED_ON         LOW
+#define STATUSLED_OFF        HIGH
+#endif
+#endif
+//-----------------------------------------------------
+#if defined(SENSORNODE2)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
+#define RF24NODE             122
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   4
+#define PRES_BOSCH_CHANNEL   5
+#define HUMI_BOSCH_CHANNEL   6
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   2
+#define HUMI_AHT20_CHANNEL   3
+#define EEPROM_VERSION       44
+#define EMPTYLOOPS           0
+#define SLEEPTIME            1200
+#define SLEEPTIME_LV         7200
+#define VOLT_LV              3.5
+#define VOLT_OFF             0.7
+#define SLEEP4MS_FAC         992
+#define STATUSLED_ON         LOW
+#define STATUSLED_OFF        HIGH
+#endif
+#endif
+//-----------------------------------------------------
+#if defined(SENSORNODE3)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
+#define RF24NODE             123
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   4
+#define PRES_BOSCH_CHANNEL   5
+#define HUMI_BOSCH_CHANNEL   6
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   2
+#define HUMI_AHT20_CHANNEL   3
+#define EEPROM_VERSION       65
+#define EMPTYLOOPS           0
+#define SLEEPTIME            1200
+#define SLEEPTIME_LV         7200
+#define VOLT_LV              3.5
+#define VOLT_OFF             0.7
+#define SLEEP4MS_FAC         990
+#define STATUSLED            A2
+#endif
+#endif
+//-----------------------------------------------------
+#if defined(SENSORNODE4)
+#if defined(RF24NODE)
+#error "Doppelte Node Definition
+#else
+#define RF24NODE             124
+#define SENSOR_BOSCH
+#define TEMP_BOSCH_CHANNEL   4
+#define PRES_BOSCH_CHANNEL   5
+#define HUMI_BOSCH_CHANNEL   6
+#define SENSOR_AHT20
+#define TEMP_AHT20_CHANNEL   2
+#define HUMI_AHT20_CHANNEL   3
+#define EEPROM_VERSION       65
+#define EMPTYLOOPS           0
+#define SLEEPTIME            1200
+#define SLEEPTIME_LV         7200
+#define VOLT_LV              3.5
+#define VOLT_OFF             0.7
+#define SLEEP4MS_FAC         990
 #endif
 #endif
 //-----------------------------------------------------
@@ -323,26 +467,6 @@
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //define constrains
-#if defined (ZAEHLER)
-#ifndef ZAEHLER_CHANNEL
-#define ZAEHLER_CHANNEL        13
-#endif
-#ifndef ZAEHLER_LO_CHANNEL
-#define ZAEHLER_LO_CHANNEL      11
-#endif
-#ifndef ZAEHLER_HI_CHANNEL
-#define ZAEHLER_HI_CHANNEL      12
-#endif
-#ifndef ZAEHLER_LO_SET_CHANNEL
-#define ZAEHLER_LO_SET_CHANNEL  51
-#endif
-#ifndef ZAEHLER_HI_SET_CHANNEL
-#define ZAEHLER_HI_SET_CHANNEL  52
-#endif 
-#ifndef ZAEHLER_PIN
-#define ZAEHLER_PIN             2
-#endif
-#endif
 
 #if defined(DISPLAY_5110)
 #define DISPLAY_ALL
@@ -367,9 +491,6 @@
 #if defined(DEBUG_SERIAL_PROC)
 #define DEBUG_SERIAL
 #endif
-#if defined(LOAD_BALANCER) || defined(DISCHARGE1) || defined(DISCHARGE1)
-#define BATT_MONITOR
-#endif
 
 //basic definitions - can be overwritten in node settings
 //EEPROM Version disabled by default !!!!!
@@ -386,6 +507,13 @@
 #endif
 
 // The status LED
+#ifdef NO_STATUSLED
+#undef STATUSLED
+#undef STATUSLED_ON
+#undef STATUSLED_OFF
+#undef DEBUG_STATUSLED_RADIO
+#undef DEBUG_STATUSLED_RADIO_TX
+#else
 #ifndef STATUSLED
 #define STATUSLED 3
 #endif
@@ -395,7 +523,7 @@
 #ifndef STATUSLED_OFF
 #define STATUSLED_OFF LOW
 #endif
-
+#endif //NO_STATUSLED
 // Sensors
 
 // A dummy temperature
